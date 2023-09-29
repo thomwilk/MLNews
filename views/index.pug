@@ -1,0 +1,42 @@
+// BEGIN: ed8c6549bwf9
+html(lang="en")
+// END: ed8c6549bwf9
+
+head
+  meta(charset="UTF-8")
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  link(rel='stylesheet' href='https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css')
+  title URL Redirect App
+
+body.bg-gray-100.p-4
+  .container.mx-auto
+    h1.text-4xl.font-semibold.mb-4 URL Redirect App
+    form.mb-4(onsubmit="addURL(event)")
+      label.block.text-lg.font-medium.mb-2(for="url") Enter URL:
+      input.w-full.p-2.border.border-black-300.rounded.mb-2(type="url", id="url", name="url", required)
+      button.bg-blue-500.text-white.py-2.px-4.rounded(type="submit") Add URL
+    #result
+    table.min-w-full.bg-white.border.border-black-300.border-collapse#urlTable
+      thead
+        tr
+          th.py-2.px-4.border.border-black-300.text-left.text-gray-600.uppercase.font-semibold Article Title
+          th.py-2.px-4.border.border-black-300.text-left.text-gray-600.uppercase.font-semibold URL
+          th.py-2.px-4.border.border-black-300.text-left.text-gray-600.uppercase.font-semibold Social Link
+      tbody#urlTableBody
+  script.
+    // Fetch all URLs from the server when the page loads
+    window.onload = async function() {
+        const response = await fetch('/all-urls');
+        const urls = await response.json();
+        const tbody = document.getElementById('urlTableBody');
+        // Populate the table with the URL data
+        urls.forEach(url => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="py-2 px-4 border border-black-300">${url.id}</td>
+                <td class="py-2 px-4 border border-black-300"><a href="${url.url}" target="_blank" class="text-blue-500 hover:underline">${url.url}</a></td>
+                <td class="py-2 px-4 border border-black-300"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" data-link="${url.id}">COPY</button></td>
+            `;
+            tbody.appendChild(tr);
+        });
+    };

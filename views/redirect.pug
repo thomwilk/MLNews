@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    meta(http-equiv='refresh', content='5;url=#{redirectUrl}')
+    title Redirecting...
+  body
+    h1 Redirecting...
+    p You will be redirected to #{redirectUrl} in 5 seconds.
+    script.
+      setTimeout(function() {
+        window.location.href = "#{redirectUrl}";
+      }, 5000);
