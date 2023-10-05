@@ -1,12 +1,15 @@
 doctype html
 html
   head
-    meta(http-equiv='refresh', content='5;url=#{redirectUrl}')
+    meta(data-rh='true' property='og:title' content=`${title}`)
+    meta(data-rh='true' property='og:image' content=`${image}`)
+    meta(data-rh='true' property='og:description' content=`${description}`)
     title Redirecting...
   body
     h1 Redirecting...
-    p You will be redirected to #{redirectUrl} in 5 seconds.
+    p You will be redirected to #{url} in 5 seconds.
     script.
       setTimeout(function() {
-        window.location.href = "#{redirectUrl}";
+        const redirectUrl = "#{url}"
+        window.location.assign(redirectUrl)
       }, 5000);
