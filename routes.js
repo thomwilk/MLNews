@@ -3,12 +3,9 @@ require("dotenv").config({ path: "./.env" });
 const { getArticleInfo } = require("./scraper");
 const { extractor } = require("./extractor");
 
-const { URL } = require('url');
-const newsSources = require('./news_sources.json');
-
-const { MongoClient, ObjectId } = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
 const uri = process.env.MONGODB_URI
-const client = new MongoClient(uri);
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 module.exports = (app, db) => {
@@ -40,15 +37,11 @@ app.post('/add-url', async (req, res) => {
 
   let domain;
   try {
-      domain = new URL(url).hostname;
-      if (domain.startsWith('www.')) {
-        domain = domain.slice(4);
-    }
-
+      domain = new URL(urlValue).hostname;
   } catch (err) {
       return res.status(400).json({ error: 'Invalid URL' });
-    }
-    
+  }
+
   if (!newsSources.domains.includes(domain)) {
       return res.status(400).json({ error: 'Domain not allowed' });
   }
