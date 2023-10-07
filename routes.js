@@ -81,7 +81,7 @@ app.post('/add-url', async (req, res) => {
       // Insert the new URL into the MongoDB collection
       const result = await collection.insertOne({ url, title, description, image: image_url });
       
-      res.render('index', { shortUrl: `http://localhost:3000/${result.insertedId}` });
+      res.render('index', { shortUrl: `https://nutty-goat-tunic.cyclic.app/${result.insertedId}` });
   } catch (err) {
       res.status(500).json({ error: err.message });
   } finally {

@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const MongoClient = require('mongodb').MongoClient;
 
 const app = express();
-const port = 3000;
 
 app.use(express.static('public'));
 
@@ -32,7 +31,7 @@ app.set('views', './views');
 connectDB().then(() => {
     // Start the server
     app.listen(port, () => {
-        console.log(`Server is running on http://localhost:${port}`);
+        console.log(`Server is running on http://localhost:${PORT}`);
     })
 }).catch(err => {
     console.log(err);
