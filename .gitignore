@@ -2,4 +2,3 @@ node_modules/
 private/
 .env
 nodemon.json
-package-lock.json
