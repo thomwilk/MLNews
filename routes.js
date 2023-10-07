@@ -11,14 +11,24 @@ const uri = process.env.MONGODB_URI
 const client = new MongoClient(uri);
 
 
-module.exports = (app, db) => {
-  app.get('/', (req, res) => {
-    res.render('index');
-  });
+module.exports = async (app, db) => {
+    await client.connect();
+    app.get('/', async (req, res) => {
+        try {
+            
+            const collection = client.db("mlnews").collection("urls");
+            const urls = await collection.find({}).toArray();
+            res.render('index', { urls });
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        } finally {
+           
+        }
+    });
 
   app.get('/all-urls', async (req, res) => {
     try {
-        await client.connect();
+        
         const collection = client.db("mlnews").collection("urls");
         
         const urls = await collection.find({}).toArray();
@@ -27,7 +37,7 @@ module.exports = (app, db) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     } finally {
-        await client.close();
+       
     }
 });
 
@@ -54,7 +64,7 @@ app.post('/add-url', async (req, res) => {
   }
 
   try {
-      await client.connect();
+      
       const collection = client.db("mlnews").collection("urls");
 
       // Check if the URL already exists
@@ -75,7 +85,7 @@ app.post('/add-url', async (req, res) => {
   } catch (err) {
       res.status(500).json({ error: err.message });
   } finally {
-      await client.close();
+     
   }
 });
  
@@ -83,7 +93,7 @@ app.get('/:id', async (req, res) => {
   const id = req.params.id;
 
   try {
-      await client.connect();
+      
       const collection = client.db("mlnews").collection("urls");
 
       // Fetch the URL by its ObjectID
@@ -101,7 +111,7 @@ app.get('/:id', async (req, res) => {
   } catch (err) {
       res.status(500).json({ error: err.message });
   } finally {
-      await client.close();
+     
   }
 });
 };
