@@ -31,7 +31,7 @@ app.set('views', './views');
 connectDB().then(() => {
     // Start the server
     app.listen(port, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
+        console.log(`Server is running on http://localhost:${process.env.PORT}`);
     })
 }).catch(err => {
     console.log(err);
