@@ -9,6 +9,7 @@ const app = express();
 app.use(express.static('public'));
 
 const bodyParser = require('body-parser');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 
@@ -29,9 +30,10 @@ app.set('view engine', 'pug');
 app.set('views', './views');
 
 connectDB().then(() => {
+  const PORT = process.env.PORT || 8080;
     // Start the server
-    app.listen(8080,() => {
-        console.log(`Server is running`);
+    app.listen(PORT,() => {
+        console.log(`Server is running on port ${PORT}`);
     })
 }).catch(err => {
     console.log(err);
