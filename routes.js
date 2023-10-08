@@ -8,11 +8,9 @@ const newsSources = require('./news_sources.json');
 
 const { MongoClient, ObjectId } = require('mongodb');
 const uri = process.env.MONGODB_URI
-const client = new MongoClient(uri);
 
-
-module.exports = async (app, db) => {
-    await client.connect();
+module.exports = (app, client) => {
+    client.connect();
     app.get('/', async (req, res) => {
         try {
             
