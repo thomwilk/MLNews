@@ -30,7 +30,7 @@ app.set('views', './views');
 
 connectDB().then(() => {
     // Start the server
-    app.listen(() => {
+    app.listen(8080,() => {
         console.log(`Server is running`);
     })
 }).catch(err => {

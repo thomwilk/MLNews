@@ -24,7 +24,7 @@ module.exports = async (app, db) => {
         } finally {
            
         }
-    });
+    })
 
   app.get('/all-urls', async (req, res) => {
     try {
