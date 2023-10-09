@@ -1,13 +1,11 @@
 require("dotenv").config({ path: "./.env" })
 
 const { getArticleInfo } = require("./scraper")
-const { extractor } = require("./extractor")
 
 const { URL } = require("url")
 const newsSources = require("./news_sources.json")
 
-const { MongoClient, ObjectId } = require("mongodb")
-const uri = process.env.MONGODB_URI
+const { ObjectId } = require("mongodb")
 
 module.exports = (app, client) => {
   client.connect()

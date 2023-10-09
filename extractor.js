@@ -18,7 +18,6 @@ async function extractor(url) {
 
   const $ = cheerio.load(html);
     
-  // extract social media facebook meta tags: og:title, og:description, og:image
   const ogTitle = $("meta[property='og:title']").attr("content")
   const ogDescription = $("meta[property='og:description']").attr("content")
   const ogImage = $("meta[property='og:image']").attr("content")
