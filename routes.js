@@ -87,15 +87,16 @@ app.post('/add-url', async (req, res) => {
   }
 });
  
-app.get('/:id', async (req, res) => {
-  const id = req.params.id;
+    app.get('/:id', async (req, res) => {
+    console.log(req.params.id);
+    const id = req.params.id;
 
   try {
       
       const collection = client.db("mlnews").collection("urls");
 
       // Fetch the URL by its ObjectID
-      const urlDocument = await collection.findOne({ _id: ObjectId(id) });
+      const urlDocument = await collection.findOne({ _id: new ObjectId(id) });
       if (urlDocument) {
           res.status(200).render('redirect', { 
               title: urlDocument.title, 
