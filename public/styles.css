@@ -1,0 +1,13 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    width: 100%;
+    margin: 0 auto;
+}
+body, table th, table td {
+    background: linear-gradient(45deg, #f3f4f6, #eef1f5);
+}
+
+th{
+    font-weight: bold;
+}

@@ -4,21 +4,33 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     title News Nudge
     link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous")
+    link(href="styles.css" rel="stylesheet" )
     link(rel="icon" href="images/favicon.ico" type="image/x-icon")
   body 
     .container.mx-auto
       h1.display-4.fw-bold.mb-4.text-center News Nudge
-      form.mb-4(method='post' action='/add-url').flex
-        label.form-label.block.text-lg.fw-medium.mb-2(for='url') Enter URL:
-         input#url.form-control.mb-2(style='width:500px;' type='url' name='url' required='')
-        button.btn.btn-primary.ml-2.w-1(type='submit') Add URL
+      .container.mt-5
+        .row.justify-content-center
+          .col-md-8
+            .card.shadow-lg
+              .card-header.bg-primary.text-white
+                h4.text-center Welcome to News Nudge
+              .card-body
+                p.lead(style="font-weight: 500;") News Nudge allows you to add and manage URLs from known news sources, providing a seamless way to share articles on social media platforms.
+                p.lead(style="font-weight: 500;") With a user-friendly interface, you can easily input URLs, view them in a structured table, and share them on platforms like Facebook. Our goal is to make sharing and accessing news articles straightforward and efficient.
+                p.lead.text-center.font-weight-bold(style="font-weight: 500;") Sharing is caring!
+      form.mt-4.mb-4(method='post' action='/add-url').row
+        label.form-label(for='url') Enter URL:
+        .col-sm-10
+          input#url.form-control(type='url' name='url' required='' style='width:500px;')
+          button.btn.btn-primary.ml-2.w-1(type='submit') Add URL
       #result
       table#urlTable.table.table-bordered
         thead
           tr
-            th.py-2.px-4.border.border-dark.text-start.text-gray-600.text-uppercase.fw-semibold Title
-            th.py-2.px-4.border.border-dark.text-start.text-gray-600.text-uppercase.fw-semibold Description
-            th.py-2.px-4.border.border-dark.text-start.text-gray-600.text-uppercase.fw-semibold Facebook Link
+            th.py-2.px-4.border.border-dark.text-center.text-gray-600.text-uppercase.fw-semibold Title
+            th.py-2.px-4.border.border-dark.text-center.text-gray-600.text-uppercase.fw-semibold Description
+            th.py-2.px-4.border.border-dark.text-center.text-gray-600.text-uppercase.fw-semibold Social Links
         tbody#urlTableBody
   script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js")
   script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous")
