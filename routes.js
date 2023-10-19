@@ -41,10 +41,7 @@ module.exports = (app, client) => {
 
     let domain
     try {
-      domain = new URL(url).hostname
-      if (domain.startsWith("www.")) {
-        domain = domain.slice(4)
-      }
+      domain = new URL(url).hostname.replace(/^www\./, '')
     } catch (err) {
       return res.status(400).json({ error: "Invalid URL" })
     }
