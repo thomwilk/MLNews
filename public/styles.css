@@ -11,3 +11,7 @@ body, table th, table td {
 th{
     font-weight: bold;
 }
+
+#success {
+    display: none;
+}

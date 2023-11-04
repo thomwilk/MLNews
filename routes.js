@@ -47,8 +47,13 @@ module.exports = (app, client) => {
     }
 
     if (!newsSources.domains.includes(domain)) {
-      return res.status(400).json({ error: "Domain not allowed" })
-    }
+        const email = "thomwilkinson@gmail.com"
+        const subject = `${domain} is not included in database`
+        const body = `Please add ${domain} to the NewsNudge database.`
+        const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+
+      return res.status(400).render("error", { domain, mailtoLink })
+      }
 
     try {
       const collection = client.db("NewsNudge").collection("urls")
@@ -56,7 +61,9 @@ module.exports = (app, client) => {
       // Check if the URL already exists
       const existingUrl = await collection.findOne({ url: url })
       if (existingUrl) {
-        return res.status(409).json({ error: "URL already exists" })
+        const id = existingUrl._id
+        console.log(`ID: ${id}`)
+        return res.render("exists", { shortUrl: `https://newsnudge.ca/${id}` })
       }
 
       // Fetch article info
@@ -73,7 +80,7 @@ module.exports = (app, client) => {
       })
 
       res.render("index", {
-        shortUrl: `https://nutty-goat-tunic.cyclic.app/${result.insertedId}`,
+        shortUrl: `https://newsnudge.ca/${result.insertedId}`,
       })
     } catch (err) {
       res.status(500).json({ error: err.message })
